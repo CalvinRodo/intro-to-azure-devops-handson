@@ -20,6 +20,14 @@ jobs:
       inputs: 
         artifactName: images
         targetPath: './publish'
+  - job: scan_secrets
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - script: | 
+        pip install detect-secrets && \
+        detect-secrets scan
+      displayName: 'install detect-secrets'
   - job: integration_tests
     pool:
       vmImage: 'Ubuntu-16.04'
