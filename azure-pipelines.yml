@@ -2,21 +2,32 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs: 
+  - job: build_containers
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - script: docker-compose build
+      displayName: 'Build Containers'
+    - script: | 
+        mkdir "publish" && \
+        docker save -o ./publish/docker-images.tar express-api:latest vue-client:latest
+      displayName: 'save docker image'
+    - task: PublishPipelineArtifact@0
+      inputs: 
+        artifactName: images
+        targetPath: './publish'
+  - job: integration_tests
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    dependsOn: 
+      - build_containers
+    steps:
+    - script: echo "Well okay so I don't do nothing!"
+      
 
-steps:
-- script: docker-compose build
-  displayName: 'Build Containers'
-- script: | 
-    mkdir "publish" && \
-    docker save -o ./publish/docker-images.tar express-api:latest vue-client:latest
-  displayName: 'save docker image'
-- task: PublishPipelineArtifact@0
-  inputs: 
-    artifactName: images
-    targetPath: './publish'
+
+
