@@ -23,6 +23,8 @@ jobs:
   - job: scan_secrets
     pool:
       vmImage: 'Ubuntu-16.04'
+    steps:
+      - script: npx snyk test
   - job: integration_tests
     pool:
       vmImage: 'Ubuntu-16.04'
