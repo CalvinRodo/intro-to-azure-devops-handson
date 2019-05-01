@@ -29,9 +29,8 @@ jobs:
         versionSpec: '2.x' 
         addToPath: true 
     - script: | 
-        pip install --upgrade pip && \
-        pip install detect-secrets && \
-        detect-secrets scan
+        pip install detect-secrets 
+        pip install truffleHog
       displayName: 'install detect-secrets'
   - job: integration_tests
     pool:
