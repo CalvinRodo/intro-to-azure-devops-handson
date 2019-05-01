@@ -29,6 +29,7 @@ jobs:
       - script: |
           cd vue-client
           npm ci
+          npm i -g snyk
           npx snyk ignore --id=SNYK-JS-AXIOS-174505 --reason="Demo purposes"
           npx snyk test
         env: 
