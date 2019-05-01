@@ -29,8 +29,7 @@ jobs:
       - script: |
           cd vue-client
           npm ci
-          npm i -g snyk
-          npx snyk ignore --id=SNYK-JS-AXIOS-174505 --reason="Demo purposes"
+          npx snyk auth
           npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
@@ -41,6 +40,7 @@ jobs:
       - script: |
           cd express-api
           npm ci
+          npx snyk auth
           npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
