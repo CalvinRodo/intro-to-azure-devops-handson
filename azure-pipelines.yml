@@ -28,7 +28,7 @@ jobs:
     steps:
       - script: |
           cd vue-client
-          npm i
+          npm ci
           npx snyk ignore --id=174505 --reason="Demo purposes"
           npx snyk test
         env: 
@@ -39,7 +39,7 @@ jobs:
     steps:
       - script: |
           cd express-api
-          npm i
+          npm ci
           npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
