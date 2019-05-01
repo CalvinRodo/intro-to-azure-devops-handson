@@ -30,7 +30,7 @@ jobs:
         addToPath: true 
     - script: | 
         pip install detect-secrets 
-        detect-secrets scan
+        detect-secrets scan --all-files
       displayName: 'install detect-secrets'
   - job: integration_tests
     pool:
