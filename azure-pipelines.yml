@@ -5,6 +5,8 @@
 trigger:
 - master
 
+
+
 jobs: 
   - job: build_containers
     pool:
@@ -25,6 +27,8 @@ jobs:
       vmImage: 'Ubuntu-16.04'
     steps:
       - script: npx snyk test
+        env: 
+          SNYK_TOKEN: $(SNYK_TOKEN)
   - job: integration_tests
     pool:
       vmImage: 'Ubuntu-16.04'
