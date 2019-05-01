@@ -12,4 +12,11 @@ pool:
 steps:
 - script: docker-compose build
   displayName: 'Build Containers'
-
+- script: | 
+    mkdir "publish" && \
+    docker save -o ./publish/docker-images.tar express-api:latest vue-client:latest
+  displayName: 'save docker image'
+- task: PublishPipelineArtifact@0
+  inputs: 
+    artifactName: images
+    targetPath: './publish'
