@@ -26,12 +26,17 @@ jobs:
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
-      - script: cd vue-client && npm i
-      - script: cd vue-client && npx snyk test
+      - script: |
+          cd express-api
+          npm i
+          npx snyk ignore --id=174505 --reason="Demo purposes"
+          npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
-      - script: cd express-api && npm i
-      - script: cd express-api && npx snyk test
+      - script: |
+          cd express-api
+          npm i
+          npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
   - job: integration_tests
