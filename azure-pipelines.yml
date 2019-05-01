@@ -25,6 +25,7 @@ jobs:
       vmImage: 'Ubuntu-16.04'
     steps:
     - script: | 
+        pip install --upgrade pip && \
         pip install detect-secrets && \
         detect-secrets scan
       displayName: 'install detect-secrets'
