@@ -29,7 +29,6 @@ jobs:
       - script: |
           cd vue-client
           npm ci
-          npx snyk auth
           npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
