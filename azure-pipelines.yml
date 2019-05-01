@@ -22,17 +22,21 @@ jobs:
       inputs: 
         artifactName: images
         targetPath: './publish'
-  - job: vulnerability_scanning
+  - job: vulnerability_scanning_vue_client
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
       - script: |
-          cd express-api
+          cd vue-client
           npm i
           npx snyk ignore --id=174505 --reason="Demo purposes"
           npx snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
+  - job: vulnerability_scanning_express_api
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
       - script: |
           cd express-api
           npm i
