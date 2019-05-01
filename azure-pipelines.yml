@@ -26,8 +26,11 @@ jobs:
     dependsOn: 
       - build_containers
     steps:
-    - script: echo "Well okay so I don't do nothing!"
-      
-
-
-
+      - task: DownloadPipelineArtifact@0
+        inputs: 
+          targetPath: .
+          artifactName: images
+      - script: docker load < docker-images.tar
+        displayName: 'Loading Docker Images'
+      - script: docker-compose up -d
+        displayName: 'Start Backend'
