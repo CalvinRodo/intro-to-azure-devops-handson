@@ -23,15 +23,6 @@ jobs:
   - job: scan_secrets
     pool:
       vmImage: 'Ubuntu-16.04'
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '2.x' 
-        addToPath: true 
-    - script: | 
-        pip install detect-secrets 
-        detect-secrets scan --all-files
-      displayName: 'install detect-secrets'
   - job: integration_tests
     pool:
       vmImage: 'Ubuntu-16.04'
