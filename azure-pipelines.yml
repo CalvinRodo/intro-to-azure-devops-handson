@@ -22,12 +22,16 @@ jobs:
       inputs: 
         artifactName: images
         targetPath: './publish'
-  - job: scan_secrets
+  - job: vulnerability_scanning
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
       - script: cd vue-client && npm i
       - script: cd vue-client && snyk test
+        env: 
+          SNYK_TOKEN: $(SNYK_TOKEN)
+      - script: cd express-api && npm i
+      - script: cd express-api && snyk test
         env: 
           SNYK_TOKEN: $(SNYK_TOKEN)
   - job: integration_tests
